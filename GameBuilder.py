@@ -2,6 +2,12 @@ from queue import Queue
 from threading import Thread
 import random
 from game_objects import *
+from os.path import join
+import pygame
+
+
+def get_asset(name):
+    return join("assets", name)
 
 
 class GameBuilder:
@@ -12,17 +18,17 @@ class GameBuilder:
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.fire_sounds = Queue()
         self.explosions = Queue()
-        self.fire_sound = pygame.mixer.Sound('assets/laser.wav')
-        self.explosion = pygame.mixer.Sound('assets/explosion.wav')
+        self.fire_sound = pygame.mixer.Sound(get_asset('laser.wav'))
+        self.explosion = pygame.mixer.Sound(get_asset('explosion.wav'))
         self.score_text = pygame.font.Font("freesansbold.ttf", 32)
         self.game_over_text = pygame.font.Font("freesansbold.ttf", 50)
-        self.playerimg = pygame.image.load("assets/player.png")
-        self.enemyimg = pygame.image.load("assets/small_enemy.png")
-        self.icon = pygame.image.load("assets/ufo.png")
+        self.playerimg = pygame.image.load(get_asset("player.png"))
+        self.enemyimg = pygame.image.load(get_asset("small_enemy.png"))
+        self.icon = pygame.image.load(get_asset("ufo.png"))
         self.ENEMY_COUNT = 20
         self.game_over = False
         pygame.display.set_icon(self.icon)
-        pygame.mixer.music.load("assets/background.wav")
+        pygame.mixer.music.load(get_asset("background.wav"))
         self.running = False
         self.enemies = []
         self.bullets = []
